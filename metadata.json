@@ -1,0 +1,8 @@
+{
+  "name": "Rami Almohamad CV Portfolio",
+  "description": "A professional CV and interactive portfolio for Rami Almohamad.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
