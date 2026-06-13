@@ -30,9 +30,11 @@ export default function App() {
     const root = window.document.documentElement;
     if (darkMode) {
       root.classList.add("dark");
+      root.style.backgroundColor = "#020617"; // slate-950
       localStorage.setItem("rami_theme", "dark");
     } else {
       root.classList.remove("dark");
+      root.style.backgroundColor = "#f8fafc"; // slate-50
       localStorage.setItem("rami_theme", "light");
     }
   }, [darkMode]);
