@@ -25,23 +25,7 @@ export default function ContactMe() {
     setStatus("sending");
     setStages(["Initializing SMTP pipeline handshake..."]);
     
-    const activeKey = (import.meta as any).env.VITE_WEB3FORMS_ACCESS_KEY;
-
-    if (!activeKey) {
-      // Polished simulation mode when VITE_WEB3FORMS_ACCESS_KEY is not defined yet
-      await sleep(800);
-      setStages(prev => [...prev, "Securing TLS connection with mail.google.com..."]);
-      await sleep(800);
-      setStages(prev => [...prev, "Processing packet header variables: injecting message payloads..."]);
-      await sleep(800);
-      setStages(prev => [...prev, "Notice: Running in Sandbox Simulator Mode (No VITE_WEB3FORMS_ACCESS_KEY provided)."]);
-      await sleep(800);
-      setStages(prev => [...prev, "Mock transmission package dispatched successfully to rami.attieh54@gmail.com!"]);
-      await sleep(600);
-      setStatus("success");
-      setFormData({ name: "", email: "", subject: "", message: "" });
-      return;
-    }
+    const activeKey = (import.meta as any).env.VITE_WEB3FORMS_ACCESS_KEY || "9327fa1f-5fb5-4852-ae5d-4156a7a72acf";
 
     try {
       await sleep(600);
@@ -161,25 +145,6 @@ export default function ContactMe() {
           {/* Form Card (Right 7 Cols) */}
           <div className="lg:col-span-12 xl:col-span-7 bg-slate-50 dark:bg-slate-950 border border-slate-200/50 dark:border-slate-800 p-6 sm:p-8 rounded-2xl relative">
             
-            {/* Elegant Setup Guide Alert Box (visible only when the VITE_WEB3FORMS_ACCESS_KEY variable isn't created yet) */}
-            {!(import.meta as any).env.VITE_WEB3FORMS_ACCESS_KEY && status === "idle" && (
-              <div className="mb-6 p-4 bg-amber-500/10 border border-amber-500/20 text-slate-700 dark:text-amber-400 rounded-xl text-xs flex flex-col gap-2 leading-relaxed">
-                <div className="font-bold flex items-center gap-1.5 text-slate-800 dark:text-amber-300">
-                  <AlertCircle className="w-4 h-4 text-amber-500 shrink-0" /> Contact Form Activation Guide
-                </div>
-                <p>
-                  This form is fitted with a live secure mail pipeline. To send physical emails directly to your inbox <strong>(rami.attieh54@gmail.com)</strong>:
-                </p>
-                <ol className="list-decimal pl-4.5 space-y-1">
-                  <li>Visit <a href="https://web3forms.com" target="_blank" rel="noreferrer" className="underline hover:text-amber-500 font-semibold inline-flex items-center gap-0.5">web3forms.com</a> and enter your email to receive a free Access Key in 5 seconds.</li>
-                  <li>In your AI Studio project settings (top-right menu or Secrets management), create a new environment variable key named <strong className="font-mono bg-slate-100 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 px-1 py-0.5 rounded text-amber-600 dark:text-amber-300">VITE_WEB3FORMS_ACCESS_KEY</strong> and paste your key.</li>
-                </ol>
-                <p className="opacity-80">
-                  Currently running in sandbox preview simulation mode. Submissions will simulate successful handshake pipelines!
-                </p>
-              </div>
-            )}
-
             {status === "idle" ? (
               <form onSubmit={handleSubmit} className="space-y-5">
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
